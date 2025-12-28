@@ -1,15 +1,15 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, Music } from 'lucide-react';
+import { Pause, Play, Volume2, VolumeX, Music } from 'lucide-react';
 
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Using a royalty-free ambient music URL (placeholder)
-  const musicUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+  const musicUrl = "/music/river-flows-in-you.mp3";
 
   useEffect(() => {
     if (audioRef.current) {
@@ -17,6 +17,31 @@ const MusicPlayer = () => {
       audioRef.current.loop = true;
     }
   }, []);
+
+  // Attempt autoplay on first user interaction with the page
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (!hasInteracted && audioRef.current) {
+        setHasInteracted(true);
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch(() => {
+          // Autoplay blocked, user needs to click play
+        });
+      }
+    };
+
+    // Listen for any user interaction
+    document.addEventListener('click', handleFirstInteraction, { once: true });
+    document.addEventListener('scroll', handleFirstInteraction, { once: true });
+    document.addEventListener('touchstart', handleFirstInteraction, { once: true });
+
+    return () => {
+      document.removeEventListener('click', handleFirstInteraction);
+      document.removeEventListener('scroll', handleFirstInteraction);
+      document.removeEventListener('touchstart', handleFirstInteraction);
+    };
+  }, [hasInteracted]);
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -26,10 +51,6 @@ const MusicPlayer = () => {
         audioRef.current.play().catch(() => {
           // Autoplay blocked by browser
         });
-        if (isMuted) {
-          setIsMuted(false);
-          audioRef.current.muted = false;
-        }
       }
       setIsPlaying(!isPlaying);
     }
@@ -44,7 +65,7 @@ const MusicPlayer = () => {
 
   return (
     <>
-      <audio ref={audioRef} src={musicUrl} />
+      <audio ref={audioRef} src={musicUrl} preload="auto" />
       
       <motion.div
         initial={{ opacity: 0, y: 100 }}
@@ -82,7 +103,7 @@ const MusicPlayer = () => {
               initial={{ opacity: 0, scale: 0.8, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 10 }}
-              className="absolute bottom-16 right-0 bg-cream rounded-2xl shadow-elevated p-4 min-w-[200px] watercolor-border"
+              className="absolute bottom-16 right-0 bg-cream rounded-2xl shadow-elevated p-4 min-w-[220px] watercolor-border"
             >
               <p className="font-display text-sage-dark text-sm mb-3">Wedding Music</p>
               
@@ -90,7 +111,7 @@ const MusicPlayer = () => {
                 {/* Play/Pause */}
                 <motion.button
                   onClick={togglePlay}
-                  className="w-10 h-10 rounded-full bg-sage flex items-center justify-center text-cream hover:bg-sage-dark transition-colors"
+                  className="w-12 h-12 rounded-full bg-sage flex items-center justify-center text-cream hover:bg-sage-dark transition-colors"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -121,7 +142,7 @@ const MusicPlayer = () => {
                     {isPlaying ? 'Now Playing' : 'Paused'}
                   </p>
                   <p className="font-body text-xs text-sage truncate">
-                    Ambient Piano
+                    River Flows in You
                   </p>
                 </div>
               </div>
