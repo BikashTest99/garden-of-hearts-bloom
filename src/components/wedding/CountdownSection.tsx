@@ -14,7 +14,7 @@ const CountdownSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   
-  const receptionDate = new Date('2025-02-07T16:00:00');
+  const receptionDate = new Date('2026-02-07T16:00:00');
   
   const calculateTimeLeft = (): TimeLeft => {
     const difference = +receptionDate - +new Date();
@@ -45,8 +45,8 @@ const CountdownSection = () => {
     const title = "Salmon & Dr. Silpina's Wedding Reception";
     const details = "Join us for the wedding reception of Salmon and Dr. Silpina at R.C. Complex, Lamachaur, Pokhara.";
     const location = "R.C. Complex, Lamachaur, Pokhara, Nepal";
-    const startDate = "20250207T160000";
-    const endDate = "20250207T220000";
+    const startDate = "20260207T160000";
+    const endDate = "20260207T220000";
     
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&dates=${startDate}/${endDate}`;
     
@@ -112,7 +112,7 @@ const CountdownSection = () => {
             </h2>
           </div>
           <p className="font-body text-sage/70">
-            February 7, 2025 • R.C. Complex, Lamachaur
+            February 7, 2026 • R.C. Complex, Lamachaur
           </p>
         </motion.div>
 
