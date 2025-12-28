@@ -1,96 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Wedding Color Palette - Sage Garden Theme */
+    --background: 40 33% 95%; /* Soft cream #F5F1E8 */
+    --foreground: 80 15% 28%; /* Deep olive #4A5240 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 40 30% 92%; /* Warm cream #E8DCC4 */
+    --card-foreground: 80 15% 28%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 40 33% 95%;
+    --popover-foreground: 80 15% 28%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 90 15% 43%; /* Sage green #6B7D5C */
+    --primary-foreground: 40 33% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 90 12% 55%; /* Lighter sage #8B9A7D */
+    --secondary-foreground: 40 33% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 40 20% 88%;
+    --muted-foreground: 80 10% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 43 57% 52%; /* Warm gold #D4AF37 */
+    --accent-foreground: 40 33% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 90 10% 75%;
+    --input: 90 10% 80%;
+    --ring: 90 15% 43%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Custom Wedding Variables */
+    --sage: 90 15% 43%;
+    --sage-light: 90 12% 55%;
+    --sage-dark: 80 15% 28%;
+    --cream: 40 33% 95%;
+    --cream-warm: 40 30% 92%;
+    --gold: 43 57% 52%;
+    --gold-soft: 43 40% 70%;
+    --olive: 80 15% 28%;
+    --white-soft: 0 0% 99%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Gradients */
+    --gradient-watercolor: linear-gradient(
+      135deg,
+      hsl(40 33% 95%) 0%,
+      hsl(90 12% 88%) 50%,
+      hsl(40 30% 92%) 100%
+    );
+    --gradient-sage: linear-gradient(
+      180deg,
+      hsl(90 15% 43% / 0.1) 0%,
+      hsl(90 12% 55% / 0.2) 100%
+    );
+    --gradient-gold: linear-gradient(
+      135deg,
+      hsl(43 57% 52%) 0%,
+      hsl(43 40% 70%) 100%
+    );
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(90 15% 43% / 0.1);
+    --shadow-gold: 0 4px 30px hsl(43 57% 52% / 0.3);
+    --shadow-elevated: 0 10px 40px hsl(80 15% 28% / 0.15);
 
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Typography */
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Lora', serif;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 80 20% 8%;
+    --foreground: 40 33% 95%;
+    --card: 80 15% 12%;
+    --card-foreground: 40 33% 95%;
+    --popover: 80 20% 8%;
+    --popover-foreground: 40 33% 95%;
+    --primary: 90 15% 55%;
+    --primary-foreground: 80 20% 8%;
+    --secondary: 90 12% 40%;
+    --secondary-foreground: 40 33% 95%;
+    --muted: 80 10% 20%;
+    --muted-foreground: 40 20% 70%;
+    --accent: 43 57% 52%;
+    --accent-foreground: 80 20% 8%;
+    --border: 80 10% 20%;
+    --input: 80 10% 25%;
+    --ring: 90 15% 55%;
   }
 }
 
@@ -99,7 +102,384 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  /* Watercolor Effects */
+  .watercolor-wash {
+    background: var(--gradient-watercolor);
+    position: relative;
+  }
+
+  .watercolor-wash::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 30%, hsl(var(--sage) / 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, hsl(var(--sage-light) / 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, hsl(var(--gold) / 0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Floating Petals Animation */
+  .floating-petal {
+    animation: float-petal 15s ease-in-out infinite;
+  }
+
+  @keyframes float-petal {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg) translateX(0);
+      opacity: 0.7;
+    }
+    25% {
+      transform: translateY(-30px) rotate(45deg) translateX(20px);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(-50px) rotate(90deg) translateX(-10px);
+      opacity: 0.8;
+    }
+    75% {
+      transform: translateY(-20px) rotate(135deg) translateX(15px);
+      opacity: 0.9;
+    }
+  }
+
+  /* Gentle Sway Animation */
+  .gentle-sway {
+    animation: sway 4s ease-in-out infinite;
+  }
+
+  @keyframes sway {
+    0%, 100% {
+      transform: rotate(-2deg);
+    }
+    50% {
+      transform: rotate(2deg);
+    }
+  }
+
+  /* Shimmer Effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--gold) / 0.3) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Breathing Animation */
+  .breathing {
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 1;
+    }
+  }
+
+  /* Twinkling Stars */
+  .twinkle {
+    animation: twinkle 2s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  /* Pulse Glow */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--gold) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--gold) / 0.6);
+    }
+  }
+
+  /* Watercolor Border */
+  .watercolor-border {
+    position: relative;
+    border: 2px solid hsl(var(--sage) / 0.3);
+    border-radius: var(--radius);
+  }
+
+  .watercolor-border::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: linear-gradient(
+      45deg,
+      hsl(var(--sage) / 0.1) 0%,
+      transparent 25%,
+      hsl(var(--gold) / 0.1) 50%,
+      transparent 75%,
+      hsl(var(--sage-light) / 0.1) 100%
+    );
+    border-radius: calc(var(--radius) + 4px);
+    z-index: -1;
+    filter: blur(4px);
+  }
+
+  /* Scroll Indicator */
+  .scroll-indicator {
+    animation: bounce-down 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce-down {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(10px);
+      opacity: 0.5;
+    }
+  }
+
+  /* Gold Text */
+  .text-gold-gradient {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Elegant Divider */
+  .elegant-divider {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--gold) / 0.5) 50%,
+      transparent 100%
+    );
+  }
+
+  .elegant-divider::before,
+  .elegant-divider::after {
+    content: '❧';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: hsl(var(--gold));
+    font-size: 1.25rem;
+  }
+
+  .elegant-divider::before {
+    left: 40%;
+  }
+
+  .elegant-divider::after {
+    right: 40%;
+    transform: translateY(-50%) scaleX(-1);
+  }
+
+  /* Tree Branch Animation */
+  .tree-branch {
+    transform-origin: bottom center;
+    animation: tree-sway 6s ease-in-out infinite;
+  }
+
+  @keyframes tree-sway {
+    0%, 100% {
+      transform: rotate(-1deg);
+    }
+    50% {
+      transform: rotate(1deg);
+    }
+  }
+
+  /* Wish Tag */
+  .wish-tag {
+    animation: swing 3s ease-in-out infinite;
+    transform-origin: top center;
+  }
+
+  @keyframes swing {
+    0%, 100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+
+  /* Button Styles */
+  .btn-wedding {
+    @apply relative overflow-hidden px-8 py-4 rounded-full font-medium transition-all duration-300;
+    background: hsl(var(--sage));
+    color: hsl(var(--cream));
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn-wedding:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .btn-wedding::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gold) / 0.2) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .btn-wedding:hover::after {
+    opacity: 1;
+  }
+
+  .btn-gold {
+    @apply relative overflow-hidden px-8 py-4 rounded-full font-medium transition-all duration-300;
+    background: var(--gradient-gold);
+    color: hsl(var(--olive));
+    box-shadow: var(--shadow-gold);
+  }
+
+  .btn-gold:hover {
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Constellation Line */
+  .constellation-line {
+    stroke: hsl(var(--gold));
+    stroke-width: 1;
+    stroke-dasharray: 5 5;
+    animation: dash 20s linear infinite;
+  }
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -100;
+    }
+  }
+
+  /* Music Visualizer */
+  .music-bar {
+    animation: music-wave 0.5s ease-in-out infinite alternate;
+  }
+
+  .music-bar:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  .music-bar:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .music-bar:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes music-wave {
+    0% {
+      height: 4px;
+    }
+    100% {
+      height: 16px;
+    }
+  }
+
+  /* Fade In Up */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Countdown Number */
+  .countdown-number {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 700;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px hsl(var(--gold) / 0.3);
+  }
+
+  @media (min-width: 768px) {
+    .countdown-number {
+      font-size: 6rem;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+
+  .animation-delay-800 {
+    animation-delay: 0.8s;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1s;
   }
 }
