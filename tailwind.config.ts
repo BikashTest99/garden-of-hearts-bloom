@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        display: ['Playfair Display', 'serif'],
+        body: ['Lora', 'serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -47,16 +51,21 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        sage: {
+          DEFAULT: "hsl(var(--sage))",
+          light: "hsl(var(--sage-light))",
+          dark: "hsl(var(--sage-dark))",
         },
+        cream: {
+          DEFAULT: "hsl(var(--cream))",
+          warm: "hsl(var(--cream-warm))",
+        },
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          soft: "hsl(var(--gold-soft))",
+        },
+        olive: "hsl(var(--olive))",
+        "white-soft": "hsl(var(--white-soft))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -65,25 +74,62 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in-scale": {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "watercolor-reveal": {
+          "0%": { clipPath: "circle(0% at 50% 50%)" },
+          "100%": { clipPath: "circle(100% at 50% 50%)" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        "shooting-star": {
+          "0%": { transform: "translateX(-100%) translateY(-100%)", opacity: "1" },
+          "70%": { opacity: "1" },
+          "100%": { transform: "translateX(300%) translateY(300%)", opacity: "0" },
+        },
+        "heartbeat": {
+          "0%, 100%": { transform: "scale(1)" },
+          "14%": { transform: "scale(1.1)" },
+          "28%": { transform: "scale(1)" },
+          "42%": { transform: "scale(1.1)" },
+          "70%": { transform: "scale(1)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.8s ease-out forwards",
+        "fade-in-delay": "fade-in 0.8s ease-out 0.3s forwards",
+        "fade-in-scale": "fade-in-scale 0.6s ease-out forwards",
+        "watercolor-reveal": "watercolor-reveal 2s ease-out forwards",
+        "float": "float 6s ease-in-out infinite",
+        "shooting-star": "shooting-star 3s ease-out infinite",
+        "heartbeat": "heartbeat 2s ease-in-out infinite",
+      },
+      backgroundImage: {
+        "gradient-watercolor": "var(--gradient-watercolor)",
+        "gradient-sage": "var(--gradient-sage)",
+        "gradient-gold": "var(--gradient-gold)",
+      },
+      boxShadow: {
+        "soft": "var(--shadow-soft)",
+        "gold": "var(--shadow-gold)",
+        "elevated": "var(--shadow-elevated)",
       },
     },
   },
