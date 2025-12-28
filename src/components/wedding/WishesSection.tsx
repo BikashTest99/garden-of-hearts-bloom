@@ -1,17 +1,18 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { Heart, Send, X } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { Heart, Send, X, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 interface Wish {
   id: string;
   name: string;
   message: string;
-  timestamp: number;
+  created_at: string;
 }
 
 const WishesSection = () => {
@@ -19,16 +20,53 @@ const WishesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { toast } = useToast();
   
-  const [wishes, setWishes] = useState<Wish[]>([
-    { id: '1', name: 'The Anderson Family', message: 'Wishing you a lifetime of love and happiness!', timestamp: Date.now() - 86400000 },
-    { id: '2', name: 'Uncle Prakash', message: 'May God bless your union abundantly!', timestamp: Date.now() - 172800000 },
-    { id: '3', name: 'Priya & Raj', message: 'So happy for you both! Love always.', timestamp: Date.now() - 259200000 },
-  ]);
+  const [wishes, setWishes] = useState<Wish[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newWish, setNewWish] = useState({ name: '', message: '' });
   const [selectedWish, setSelectedWish] = useState<Wish | null>(null);
 
-  const handleSubmitWish = () => {
+  // Fetch wishes from database
+  useEffect(() => {
+    const fetchWishes = async () => {
+      const { data, error } = await supabase
+        .from('wishes')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) {
+        console.error('Error fetching wishes:', error);
+      } else {
+        setWishes(data || []);
+      }
+      setIsLoading(false);
+    };
+
+    fetchWishes();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel('wishes-channel')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'wishes'
+        },
+        (payload) => {
+          setWishes(prev => [payload.new as Wish, ...prev]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const handleSubmitWish = async () => {
     if (!newWish.name.trim() || !newWish.message.trim()) {
       toast({
         title: "Please fill in all fields",
@@ -47,14 +85,27 @@ const WishesSection = () => {
       return;
     }
 
-    const wish: Wish = {
-      id: Date.now().toString(),
-      name: newWish.name.trim(),
-      message: newWish.message.trim(),
-      timestamp: Date.now(),
-    };
+    setIsSubmitting(true);
 
-    setWishes(prev => [wish, ...prev]);
+    const { error } = await supabase
+      .from('wishes')
+      .insert({
+        name: newWish.name.trim(),
+        message: newWish.message.trim(),
+      });
+
+    setIsSubmitting(false);
+
+    if (error) {
+      console.error('Error saving wish:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save your wish. Please try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setNewWish({ name: '', message: '' });
     setIsModalOpen(false);
     
@@ -146,8 +197,15 @@ const WishesSection = () => {
             ))}
           </motion.svg>
 
+          {/* Loading State */}
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Loader2 className="w-8 h-8 text-sage animate-spin" />
+            </div>
+          )}
+
           {/* Wish Tags */}
-          {wishes.slice(0, 6).map((wish, index) => {
+          {!isLoading && wishes.slice(0, 6).map((wish, index) => {
             const pos = treeLeafPositions[index] || { x: 50, y: 40, delay: 0 };
             return (
               <motion.button
@@ -255,10 +313,15 @@ const WishesSection = () => {
 
                 <Button
                   onClick={handleSubmitWish}
+                  disabled={isSubmitting}
                   className="w-full btn-wedding"
                 >
-                  <Send className="w-4 h-4 mr-2" />
-                  Send Blessing
+                  {isSubmitting ? (
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  ) : (
+                    <Send className="w-4 h-4 mr-2" />
+                  )}
+                  {isSubmitting ? 'Sending...' : 'Send Blessing'}
                 </Button>
               </div>
             </motion.div>
