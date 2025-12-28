@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Calendar } from 'lucide-react';
+import { Calendar, PartyPopper } from 'lucide-react';
 
 interface TimeLeft {
   days: number;
@@ -14,10 +14,10 @@ const CountdownSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   
-  const weddingDate = new Date('2025-02-07T16:00:00');
+  const receptionDate = new Date('2025-02-07T16:00:00');
   
   const calculateTimeLeft = (): TimeLeft => {
-    const difference = +weddingDate - +new Date();
+    const difference = +receptionDate - +new Date();
     
     if (difference <= 0) {
       return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -105,11 +105,14 @@ const CountdownSection = () => {
           transition={{ duration: 0.8 }}
           className="mb-12"
         >
-          <h2 className="font-display text-3xl md:text-5xl text-sage-dark mb-4">
-            Days Until Forever
-          </h2>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <PartyPopper className="w-8 h-8 text-gold" />
+            <h2 className="font-display text-3xl md:text-5xl text-sage-dark">
+              Days Until Reception
+            </h2>
+          </div>
           <p className="font-body text-sage/70">
-            The moment two hearts become one
+            February 7, 2025 • R.C. Complex, Lamachaur
           </p>
         </motion.div>
 
