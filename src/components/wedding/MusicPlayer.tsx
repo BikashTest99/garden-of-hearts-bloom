@@ -9,7 +9,7 @@ const MusicPlayer = () => {
   const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const musicUrl = "/music/river-flows-in-you.mp3";
+  const musicUrl = "/music/cant-help-falling-in-love.mp3";
 
   useEffect(() => {
     if (audioRef.current) {
@@ -142,7 +142,7 @@ const MusicPlayer = () => {
                     {isPlaying ? 'Now Playing' : 'Paused'}
                   </p>
                   <p className="font-body text-xs text-sage truncate">
-                    River Flows in You
+                    Can't Help Falling In Love
                   </p>
                 </div>
               </div>
