@@ -15,11 +15,21 @@ const MusicPlayer = () => {
     if (audioRef.current) {
       audioRef.current.volume = 0.3;
       audioRef.current.loop = true;
+      
+      // Try to autoplay immediately
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+        setHasInteracted(true);
+      }).catch(() => {
+        // Autoplay blocked, will try on first interaction
+      });
     }
   }, []);
 
-  // Attempt autoplay on first user interaction with the page
+  // Fallback: Attempt autoplay on first user interaction with the page
   useEffect(() => {
+    if (hasInteracted) return;
+
     const handleFirstInteraction = () => {
       if (!hasInteracted && audioRef.current) {
         setHasInteracted(true);
