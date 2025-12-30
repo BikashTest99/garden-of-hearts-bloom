@@ -26,6 +26,43 @@ const FloatingHeart = ({ delay, duration, left, size }: { delay: number; duratio
   </motion.div>
 );
 
+// Falling rose petal component
+const FallingPetal = ({ delay, duration, left, size, rotation }: { delay: number; duration: number; left: string; size: number; rotation: number }) => (
+  <motion.div
+    className="absolute top-0 pointer-events-none"
+    style={{ left }}
+    initial={{ y: -50, opacity: 0, rotate: 0 }}
+    animate={{ 
+      y: '100vh',
+      opacity: [0, 0.7, 0.7, 0],
+      rotate: rotation,
+      x: [0, 30, -20, 40, 0],
+    }}
+    transition={{
+      duration,
+      delay,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    <svg 
+      viewBox="0 0 24 24" 
+      style={{ width: size, height: size }}
+      className="text-rose-300/60"
+    >
+      <path 
+        d="M12 2C12 2 8 6 8 10C8 12 9.5 14 12 14C14.5 14 16 12 16 10C16 6 12 2 12 2Z" 
+        fill="currentColor"
+      />
+      <path 
+        d="M12 14C12 14 6 16 6 20C6 22 8 24 12 24C16 24 18 22 18 20C18 16 12 14 12 14Z" 
+        fill="currentColor"
+        opacity="0.7"
+      />
+    </svg>
+  </motion.div>
+);
+
 const HeroSection = () => {
   // Generate random hearts
   const hearts = Array.from({ length: 15 }, (_, i) => ({
@@ -34,6 +71,16 @@ const HeroSection = () => {
     duration: 8 + Math.random() * 6,
     left: `${5 + Math.random() * 90}%`,
     size: 12 + Math.random() * 20,
+  }));
+
+  // Generate random falling petals
+  const petals = Array.from({ length: 12 }, (_, i) => ({
+    id: i,
+    delay: Math.random() * 10,
+    duration: 10 + Math.random() * 8,
+    left: `${Math.random() * 100}%`,
+    size: 14 + Math.random() * 18,
+    rotation: 180 + Math.random() * 360,
   }));
 
   return (
@@ -62,6 +109,20 @@ const HeroSection = () => {
             duration={heart.duration}
             left={heart.left}
             size={heart.size}
+          />
+        ))}
+      </div>
+
+      {/* Falling Rose Petals */}
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+        {petals.map((petal) => (
+          <FallingPetal
+            key={petal.id}
+            delay={petal.delay}
+            duration={petal.duration}
+            left={petal.left}
+            size={petal.size}
+            rotation={petal.rotation}
           />
         ))}
       </div>
