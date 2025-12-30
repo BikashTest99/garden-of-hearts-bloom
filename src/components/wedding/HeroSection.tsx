@@ -91,7 +91,7 @@ const HeroSection = () => {
           transition={{ delay: 1.8, duration: 0.8 }}
           className="font-display text-2xl md:text-3xl text-sage italic"
         >
-          February 7, 2025
+          February 7, 2026
         </motion.p>
 
         {/* Location hint */}

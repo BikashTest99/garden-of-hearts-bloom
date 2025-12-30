@@ -14,11 +14,11 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Salmon & Dr. Silpina | Wedding Invitation - February 7, 2025</title>
-        <meta name="description" content="Join us in celebrating the holy union of Salmon and Dr. Silpina. February 7, 2025 in Pokhara, Nepal. You are cordially invited to witness our beautiful journey begin." />
-        <meta name="keywords" content="wedding, invitation, Salmon, Silpina, Pokhara, Nepal, February 2025" />
+        <title>Salmon & Dr. Silpina | Wedding Invitation - February 7, 2026</title>
+        <meta name="description" content="Join us in celebrating the holy union of Salmon and Dr. Silpina. February 7, 2026 in Pokhara, Nepal. You are cordially invited to witness our beautiful journey begin." />
+        <meta name="keywords" content="wedding, invitation, Salmon, Silpina, Pokhara, Nepal, February 2026" />
         <meta property="og:title" content="Salmon & Dr. Silpina's Wedding Invitation" />
-        <meta property="og:description" content="You are invited to the wedding celebration of Salmon and Dr. Silpina on February 7, 2025 in Pokhara, Nepal." />
+        <meta property="og:description" content="You are invited to the wedding celebration of Salmon and Dr. Silpina on February 7, 2026 in Pokhara, Nepal." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href={window.location.href} />
       </Helmet>

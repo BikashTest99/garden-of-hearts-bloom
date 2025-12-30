@@ -24,8 +24,8 @@ const ConstellationSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const stars: Star[] = [
-    { id: 'church', x: 30, y: 30, label: 'Wedding Ceremony', description: 'Pokhara Community Church • Feb 5', isVenue: true },
-    { id: 'reception', x: 70, y: 35, label: 'Reception', description: 'R.C. Complex, Lamachaur • Feb 7', isVenue: true },
+    { id: 'church', x: 30, y: 30, label: 'Wedding Ceremony', description: 'Pokhara Community Church • Feb 5, 2026', isVenue: true },
+    { id: 'reception', x: 70, y: 35, label: 'Reception', description: 'R.C. Complex, Lamachaur • Feb 7, 2026', isVenue: true },
     { id: 'groom', x: 20, y: 55, label: "Groom's Journey", description: 'Where his story began', isVenue: false },
     { id: 'bride', x: 80, y: 60, label: "Bride's Journey", description: 'Where her story began', isVenue: false },
     { id: 'union', x: 50, y: 75, label: 'Union', description: 'Where two paths become one', isVenue: false },
