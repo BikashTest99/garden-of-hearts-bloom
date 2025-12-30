@@ -1,5 +1,6 @@
 import HeroSection from '@/components/wedding/HeroSection';
 import BlessingSection from '@/components/wedding/BlessingSection';
+import StorySection from '@/components/wedding/StorySection';
 import HolyUnionSection from '@/components/wedding/HolyUnionSection';
 import ConstellationSection from '@/components/wedding/ConstellationSection';
 import VenueSection from '@/components/wedding/VenueSection';
@@ -26,6 +27,7 @@ const Index = () => {
       <main className="overflow-x-hidden">
         <HeroSection />
         <BlessingSection />
+        <StorySection />
         <HolyUnionSection />
         <ConstellationSection />
         <VenueSection />
