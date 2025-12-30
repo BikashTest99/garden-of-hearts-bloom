@@ -66,6 +66,12 @@ export default {
         },
         olive: "hsl(var(--olive))",
         "white-soft": "hsl(var(--white-soft))",
+        // Wedding theme aliases
+        "wedding-sage": "hsl(var(--sage))",
+        "wedding-cream": "hsl(var(--cream))",
+        "wedding-gold": "hsl(var(--gold))",
+        "wedding-rose": "hsl(345 40% 45%)",
+        "wedding-blush": "hsl(350 30% 90%)",
       },
       borderRadius: {
         lg: "var(--radius)",
