@@ -1,8 +1,41 @@
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Heart } from 'lucide-react';
 import heroWatercolor from '@/assets/hero-watercolor.jpg';
 
+// Floating heart component
+const FloatingHeart = ({ delay, duration, left, size }: { delay: number; duration: number; left: string; size: number }) => (
+  <motion.div
+    className="absolute bottom-0 pointer-events-none"
+    style={{ left }}
+    initial={{ y: 0, opacity: 0 }}
+    animate={{ 
+      y: '-100vh',
+      opacity: [0, 0.6, 0.6, 0]
+    }}
+    transition={{
+      duration,
+      delay,
+      repeat: Infinity,
+      ease: "linear",
+    }}
+  >
+    <Heart 
+      className="text-gold/40 fill-gold/20" 
+      style={{ width: size, height: size }}
+    />
+  </motion.div>
+);
+
 const HeroSection = () => {
+  // Generate random hearts
+  const hearts = Array.from({ length: 15 }, (_, i) => ({
+    id: i,
+    delay: Math.random() * 8,
+    duration: 8 + Math.random() * 6,
+    left: `${5 + Math.random() * 90}%`,
+    size: 12 + Math.random() * 20,
+  }));
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden watercolor-wash">
       {/* Background Image with Parallax */}
@@ -20,11 +53,24 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-cream/80 via-cream/60 to-cream/90" />
       </motion.div>
 
+      {/* Floating Hearts Rising Upward */}
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+        {hearts.map((heart) => (
+          <FloatingHeart
+            key={heart.id}
+            delay={heart.delay}
+            duration={heart.duration}
+            left={heart.left}
+            size={heart.size}
+          />
+        ))}
+      </div>
+
       {/* Floating Petals */}
       {[...Array(6)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-4 h-4 rounded-full bg-sage/20 floating-petal"
+          className="absolute w-4 h-4 rounded-full bg-sage/20 floating-petal z-[1]"
           style={{
             left: `${15 + i * 15}%`,
             top: `${20 + (i % 3) * 25}%`,
